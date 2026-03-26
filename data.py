@@ -1,3 +1,5 @@
+from urls import *
+
 existing_courier = {
     "login": "test12345asd",
     "password": "test12345",
@@ -91,13 +93,42 @@ test_order = {
     ]
 }
 
-url_list_order = [
-    'https://qa-scooter.praktikum-services.ru/api/v1/orders',
-    'https://qa-scooter.praktikum-services.ru/api/v1/orders?limit=10&page=0',
-    'https://qa-scooter.praktikum-services.ru/api/v1/orders?limit=10&page=0&nearestStation=["4"]'
-]
+url_list_order = order_list_urls
 
-url_list_order_for_courier = [
-    'https://qa-scooter.praktikum-services.ru/api/v1/orders?courierId=721912',
-    'https://qa-scooter.praktikum-services.ru/api/v1/orders?courierId=721912&nearestStation=["4", "2"]'
-]
+url_list_order_for_courier = order_list_urls_for_courier
+
+existing_courier_id = 721912
+
+not_existing_courier_id = 1
+
+without_courier_id = ''
+
+not_existing_order_id = 1
+
+without_order_track = ''
+
+not_existing_order_track = '001'
+
+ok_response = {"ok": True}
+
+not_existing_courier_id_response = "Курьера с таким id не существует"
+
+without_courier_id_response = "Недостаточно данных для поиска"
+
+not_existing_order_id_response = "Заказа с таким id не существует"
+
+without_id_response = "Not Found."
+
+not_existing_courier_delete = "Курьера с таким id нет."
+
+without_order_track_response = "Недостаточно данных для поиска"
+
+not_existing_order_track_response = "Заказ не найден"
+
+error_login = "Недостаточно данных для входа"
+
+not_found_login = "Учетная запись не найдена"
+
+login_used = "Этот логин уже используется"
+
+not_enough_data = "Недостаточно данных для создания учетной записи"
