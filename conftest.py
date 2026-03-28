@@ -1,32 +1,22 @@
 import pytest
 import requests
-import random
-import string
 import data
+from helpers import generate_courier_payload
 from urls import *
 
 
 @pytest.fixture(scope='function')
 def register_new_courier_and_return_login_password():
-    def generate_random_string(length):
-        letters = string.ascii_lowercase
-        random_string = ''.join(random.choice(letters) for i in range(length))
-        return random_string
+    payload = generate_courier_payload()
     login_pass = []
-    login = generate_random_string(10)
-    password = generate_random_string(10)
-    first_name = generate_random_string(10)
-    payload = {
-        "login": login,
-        "password": password,
-        "firstName": first_name
-    }
     response = requests.post(Urls.create_courier, data=payload)
 
     if response.status_code == 201:
-        login_pass.append(login)
-        login_pass.append(password)
-        login_pass.append(first_name)
+        
+        login_pass.append(payload["login"])
+        login_pass.append(payload["password"])
+        login_pass.append(payload["firstName"])
+    
     return login_pass, response.status_code, response.json()
 
 
@@ -85,7 +75,7 @@ def create_and_delete_order():
         if track:
             requests.put(Urls.cancel_order_by_track(track))
 
-#####################################################
+
 @pytest.fixture(scope='function')
 def finish_order():
     order_ids = []
@@ -95,7 +85,7 @@ def finish_order():
     for order_id in order_ids:
         if order_id:
             requests.put(Urls.finish_order_by_id(order_id))
-##############################################################
+
 
 @pytest.fixture(scope='function')
 def create_and_get_order():
